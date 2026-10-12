@@ -1,0 +1,105 @@
+[
+  {
+    "id": "UAT-01",
+    "actual": "Logged in as S001 and redirected to Available Courses page.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:03.485Z"
+  },
+  {
+    "id": "UAT-02",
+    "actual": "Message shown: \"Invalid student ID or password. 2 attempt(s) left.\"",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:04.214Z"
+  },
+  {
+    "id": "UAT-03",
+    "actual": "After 3rd wrong attempt: \"Account locked after 3 failed attempts. Contact the Registry.\". Correct password then gives: \"Account locked after 3 failed attempts. Contact the Registry.\"",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:04.779Z"
+  },
+  {
+    "id": "UAT-04",
+    "actual": "\"Registration confirmed for SWC4263 Software Testing and Quality Assurance. Reference: REG-7C65035C at 2026-10-12 06:18:04.\" displayed in 0.14 s; seats now 1/40.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:05.196Z",
+    "seconds": 0.138
+  },
+  {
+    "id": "UAT-05",
+    "actual": "\"SWC4413 is full (30/30). Registration rejected.\" Seats before 30/30, after 30/30.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:05.589Z",
+    "seconds": 0.129
+  },
+  {
+    "id": "UAT-06",
+    "actual": "Seats before 29/30. S001: \"Registration confirmed for SWC4613 Data Mining. Reference: REG-8CB90BE1 at 2026-10-12 06:18:06.\" (0.12 s). S060 then: \"SWC4613 is full (30/30). Registration rejected.\". Seats after 30/30.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:06.438Z",
+    "seconds": 0.12
+  },
+  {
+    "id": "UAT-07",
+    "actual": "Re-submitted SWC4263: \"You are already registered for SWC4263.\"; seats remain 1/40.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:06.516Z"
+  },
+  {
+    "id": "UAT-08",
+    "actual": "\"Timetable clash with SWC4263 (Mon 09:00-11:00).\"",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:06.845Z",
+    "seconds": 0.132
+  },
+  {
+    "id": "UAT-09",
+    "actual": "SWC4213 confirmed (0.13 s), SWC4323 confirmed (0.15 s), SWC4513 confirmed (0.16 s), SWC4723 confirmed (0.15 s). Then SWC4823: \"Credit limit exceeded: 20 + 3 credits is more than the maximum of 20.\"",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:07.884Z",
+    "seconds": 0.13
+  },
+  {
+    "id": "UAT-10",
+    "actual": "6 courses listed in day/time order (Mon 09:00-11:00 SWC4263; Tue 14:00-16:00 SWC4213; Wed 09:00-12:00 SWC4323; Thu 14:00-16:00 SWC4513; Fri 09:00-11:00 SWC4613; Fri 14:00-17:00 SWC4723). Total credits: 20 / 20.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:08.047Z"
+  },
+  {
+    "id": "UAT-11",
+    "actual": "\"SWC4613 dropped. Your seat has been released.\" Course removed from timetable: true. Total credits: 17 / 20. SWC4613 seats now 29/30.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:08.322Z"
+  },
+  {
+    "id": "UAT-12",
+    "actual": "S001 registers SWC4823: \"Registration confirmed for SWC4823 Final Year Project Seminar.\" (0.13 s). S060 retries the released SWC4613 seat: confirmed.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:08.566Z",
+    "seconds": 0.125
+  },
+  {
+    "id": "UAT-13",
+    "actual": "After logout, opening My Timetable redirects to the login page.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:08.633Z"
+  },
+  {
+    "id": "UAT-14",
+    "actual": "50 simultaneous requests for 10 seats: 16 confirmed, 34 rejected; 16 students stored as enrolled (capacity 10). Slowest response 1.46 s.",
+    "status": "FAIL",
+    "executed": "2026-10-12T06:18:12.451Z",
+    "confirmed": 16,
+    "enrolled": 16,
+    "maxSeconds": 1.46
+  },
+  {
+    "id": "UAT-15",
+    "actual": "50/50 confirmed. Average 1.07 s, 95th percentile 1.52 s, slowest 1.54 s.",
+    "status": "PASS",
+    "executed": "2026-10-12T06:18:13.996Z",
+    "confirmed": 50,
+    "avgSeconds": 1.07368,
+    "p95Seconds": 1.525,
+    "maxSeconds": 1.541
+  }
+]

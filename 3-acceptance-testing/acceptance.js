@@ -1,11 +1,12 @@
 // UniReg acceptance test run (browser-driven UAT + concurrent load).
-// Usage: node acceptance.js <outDir>   (starts/stops the app itself on port 8765)
+// Usage (from the repo's top folder): node 3-acceptance-testing/acceptance.js [outDir]
+// Starts and stops UniReg itself on port 8765. Default outDir: 3-acceptance-testing/evidence/latest-run
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const OUT = path.resolve(process.argv[2] || 'evidence');
+const OUT = path.resolve(process.argv[2] || path.join(__dirname, 'evidence', 'latest-run'));
 const SHOTS = path.join(OUT, 'screenshots');
 fs.mkdirSync(SHOTS, { recursive: true });
 const PORT = 8765;
@@ -75,7 +76,7 @@ async function countEnrolled(code) {
 (async () => {
   // ---------------- Cycle 1: browser-driven UAT, one student journey ----------------
   let app = await startApp();
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {});
   const ctx = await browser.newContext({ viewport: { width: 1100, height: 650 } });
   const page = await ctx.newPage();
   const shot = (n) => page.screenshot({ path: path.join(SHOTS, `${n}.png`) });
