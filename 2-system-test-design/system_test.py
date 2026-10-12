@@ -3,7 +3,7 @@
     python3 2-system-test-design/system_test.py               # tests app.py (v1.1)
     python3 2-system-test-design/system_test.py app_v1_0.py   # the original build
 
-Writes results/system_results.md. Interoperability (browsers, mobile) is in interop.js.
+Writes results/system_results.md (other builds get a suffix, e.g. system_results_v1_0.md). Interoperability (browsers, mobile) is in interop.js.
 Python 3 only, nothing to install.
 """
 import os
@@ -21,6 +21,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(HERE), "tools"))
 from unireg_client import Student, start_app  # noqa: E402
 
 APP = sys.argv[1] if len(sys.argv) > 1 else "app.py"
+# Results for the current build go to system_results.md; other builds get a suffix, e.g. _v1_0.
+SUFFIX = "" if APP == "app.py" else "_" + os.path.splitext(os.path.basename(APP))[0].replace("app_", "")
 results = []
 perf_rows = []
 
@@ -221,7 +223,7 @@ def main():
     os.makedirs(out, exist_ok=True)
     stamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     passed = sum(r["status"] == "PASS" for r in results)
-    with open(os.path.join(out, "system_results.md"), "w") as f:
+    with open(os.path.join(out, f"system_results{SUFFIX}.md"), "w") as f:
         f.write(f"# System test execution log\n\nBuild: `{APP}` · Run: {stamp} · **{passed} / {len(results)} passed**\n\n")
         f.write("| ID | Category | NFR | Test | Expected | Actual | Status |\n|---|---|---|---|---|---|---|\n")
         for r in results:

@@ -1,7 +1,7 @@
 """Functional test suite for UniReg (Amir's section).
 
 Runs every functional test case against a fresh copy of the app and writes the
-execution log to results/functional_results.md and results/functional_results.csv.
+execution log to results/functional_results.md and .csv (other builds get a suffix, e.g. functional_results_v1_0.md).
 
     python3 1-functional-testing/functional_test.py            # tests app.py (v1.1)
     python3 1-functional-testing/functional_test.py app_v1_0.py
@@ -20,6 +20,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(HERE), "tools"))
 from unireg_client import Student, start_app  # noqa: E402
 
 APP = sys.argv[1] if len(sys.argv) > 1 else "app.py"
+# Results for the current build go to functional_results.*; other builds get a suffix, e.g. _v1_0.
+SUFFIX = "" if APP == "app.py" else "_" + os.path.splitext(os.path.basename(APP))[0].replace("app_", "")
 CASES = []
 
 
@@ -350,12 +352,12 @@ def main():
     os.makedirs(out, exist_ok=True)
     stamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     keys = ["id", "technique", "req", "title", "input", "expected", "actual", "status"]
-    with open(os.path.join(out, "functional_results.csv"), "w", newline="") as f:
+    with open(os.path.join(out, f"functional_results{SUFFIX}.csv"), "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=keys)
         w.writeheader()
         w.writerows(results)
     passed = sum(r["status"] == "PASS" for r in results)
-    with open(os.path.join(out, "functional_results.md"), "w") as f:
+    with open(os.path.join(out, f"functional_results{SUFFIX}.md"), "w") as f:
         f.write(f"# Functional test execution log\n\nBuild: `{APP}` · Run: {stamp} · **{passed} / {len(results)} passed**\n\n")
         f.write("| ID | Technique | Req | Test | Input | Expected | Actual | Status |\n|---|---|---|---|---|---|---|---|\n")
         for r in results:

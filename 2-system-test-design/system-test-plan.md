@@ -21,7 +21,7 @@ Test UniReg as a whole running system, beyond single features: how it behaves en
 
 | Item | Value |
 |---|---|
-| System under test | UniReg prototype `app.py` (build v1.1); `app_v1_0.py` for comparison |
+| System under test | UniReg prototype `app.py` (build v1.2, current); `app_v1_1.py` and `app_v1_0.py` for before/after comparison |
 | Server | Python 3 built-in web server (ThreadingHTTPServer) with SQLite |
 | Client machine | The same laptop as the server (local network, so network delay is not measured) |
 | Test data | Students S001 to S060 (password Pass@123); 9 courses; SWC4413 starts full (30/30); SWC4823 has 10 seats |

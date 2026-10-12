@@ -6,7 +6,7 @@ Ties the three testing stages together, compiles the final report and coordinate
 
 | File | What it is | Rubric item |
 |---|---|---|
-| [UniReg_Report_Template.docx](UniReg_Report_Template.docx) | The report, ready to fill: ISO-style cover, contents page, Arial 11 justified, every section in order. Introduction, Results & Analysis and Conclusion are already drafted. Red text marks what still needs filling in. | Report Structure & Format (5) |
+| [UniReg_Report_Template.docx](UniReg_Report_Template.docx) | The report, ready to fill: ISO-style cover, contents page, Arial 11 justified, every section in order. Introduction, Results & Analysis and Conclusion are already drafted with the final v1.2 results. Red text marks what still needs filling in. | Report Structure & Format (5) |
 | [results-analysis.md](results-analysis.md) | Draft of section 5: execution summary, defects table, analysis, traceability | Results & Analysis (5) |
 | [charts/](charts/) | Results-by-stage chart and scalability chart, ready for the report and slides | Results & Analysis (5) |
 | [intro-and-conclusion-draft.md](intro-and-conclusion-draft.md) | Draft Introduction and Conclusion for the group session | Shared task |
@@ -28,9 +28,9 @@ Ties the three testing stages together, compiles the final report and coordinate
 
 1. **Collect the sections.** Amir: [1-functional-testing](../1-functional-testing/). Ramzi: [2-system-test-design](../2-system-test-design/). Yasierul: [3-acceptance-testing/docs](../3-acceptance-testing/docs/) (SHORT docx). Each folder's README says what goes in the report.
 2. **Paste each section** into [UniReg_Report_Template.docx](UniReg_Report_Template.docx) where the red placeholders are, then delete the placeholders.
-3. **Settle the open defects with the group.** DEF-02 and DEF-03 are still open. Either fix them in a v1.2 and re-run all suites, or keep them open and change the acceptance decision to "Accepted with conditions". Then update every paragraph marked ✱ in [results-analysis.md](results-analysis.md) (red text in the template).
+3. **Check the defects table** in section 5 matches what each member wrote: DEF-01 fixed in v1.1, DEF-02 and DEF-03 fixed in v1.2, all re-tested.
 4. **Hold the Introduction and Conclusion session.** Start from [intro-and-conclusion-draft.md](intro-and-conclusion-draft.md) (already in the template) and agree the final wording together.
-5. **Proofread and standardise:** names of tests, defect IDs, build names (v1.0 / v1.1), units (s, ms), tense (past tense for what was done).
+5. **Proofread and standardise:** names of tests, defect IDs, build names (v1.0 / v1.1 / v1.2), units (s, ms), tense (past tense for what was done).
 6. **Build the slides** from [presentation-plan.md](presentation-plan.md). Use the two charts on the results slide.
 7. **Record** the presentation (10 to 15 minutes), export to PDF and MP4, and submit.
 
@@ -38,7 +38,7 @@ Ties the three testing stages together, compiles the final report and coordinate
 
 - **Analyse, don't list.** The rubric's "insightful interpretation" means explaining *why* results came out as they did. The key insight: each stage found a defect the others couldn't (functional is one user at a time; only concurrent tests found DEF-01 and DEF-03).
 - **One summary table and one chart** at the top of section 5 give the marker the whole picture in 10 seconds.
-- **State readiness clearly:** "UniReg v1.1 is ready for release once DEF-02 and DEF-03 are fixed" (or "ready", if they're fixed).
+- **State readiness clearly:** "UniReg v1.2 passes every executed test and all three defects are fixed and re-tested, so it is ready for release."
 - **Mention limitations** (one laptop, two browsers not run, no admin side). It shows judgement.
 - **Keep the report consistent.** The rubric's "follows template" mark is lost on mixed fonts, different table styles and changing ID formats, more than on content.
 - **Time the presentation.** The 10 delivery marks depend on staying within 10 to 15 minutes; rehearse once with a timer.

@@ -10,9 +10,9 @@ Each member has a folder with their materials, a script that runs their tests, r
 
 | Folder | Member | Section (marks) | Results so far |
 |---|---|---|---|
-| [1-functional-testing](1-functional-testing/) | Amir | Functional Testing (25) | 31 / 32 pass, DEF-02 found |
-| [2-system-test-design](2-system-test-design/) | Ramzi | System Test Design (25) | 5 / 7 pass + 2 / 2 browsers, DEF-03 found |
-| [3-acceptance-testing](3-acceptance-testing/) | Yasierul | Acceptance Testing (25) | v1.0 14 / 15 (DEF-01), v1.1 15 / 15 |
+| [1-functional-testing](1-functional-testing/) | Amir | Functional Testing (25) | 32 / 32 on v1.2 (DEF-02 found on v1.1, fixed) |
+| [2-system-test-design](2-system-test-design/) | Ramzi | System Test Design (25) | 7 / 7 + 2 / 2 browsers on v1.2 (DEF-03 found on v1.1, fixed) |
+| [3-acceptance-testing](3-acceptance-testing/) | Yasierul | Acceptance Testing (25) | v1.0 14 / 15 (DEF-01), v1.1 and v1.2 15 / 15. Accepted |
 | [4-report-and-presentation](4-report-and-presentation/) | Aliff | Results Analysis, Report and Presentation (25) | Report template, analysis draft, charts, presentation plan |
 | Introduction and Conclusion | Everyone | Shared | Draft in [4-report-and-presentation/intro-and-conclusion-draft.md](4-report-and-presentation/intro-and-conclusion-draft.md) |
 
@@ -41,7 +41,7 @@ All commands run from this top folder. Each script starts its own copy of UniReg
 | Interoperability (ST-08 to ST-11) | `node 2-system-test-design/interop.js` | Node.js + Playwright |
 | Acceptance (UAT-01 to UAT-15) | `node 3-acceptance-testing/acceptance.js` | Node.js + Playwright |
 
-Add `app_v1_0.py` (Python scripts) or `UNIREG_APP=app_v1_0.py` (Node scripts) to test the old build. Install Playwright once with:
+Add `app_v1_0.py` or `app_v1_1.py` (Python scripts), or `UNIREG_APP=app_v1_1.py` (Node scripts), to test an older build. Install Playwright once with:
 
 ```bash
 npm install playwright && npx playwright install chromium firefox webkit
@@ -58,15 +58,16 @@ npm install playwright && npx playwright install chromium firefox webkit
 
 ## Versions and defects
 
-- `app.py`: build **v1.1** (current).
-- `app_v1_0.py`: build **v1.0**, the original build.
+| File | Build | Notes |
+|---|---|---|
+| `app.py` | **v1.2** (current) | All known defects fixed |
+| `app_v1_1.py` | v1.1 | DEF-01 fixed; still has DEF-02 and DEF-03. Kept for before/after comparison |
+| `app_v1_0.py` | v1.0 | Original build with DEF-01 |
 
 | ID | Found by | Problem | Severity | Status |
 |---|---|---|---|---|
-| DEF-01 | Acceptance (UAT-14), System (ST-02 on v1.0) | Many students registering for the last seats at once over-enrols the course | Critical | Fixed in v1.1 |
-| DEF-02 | Functional (FT-31) | Logout doesn't end the session on the server; an old cookie still works | Medium | Open |
-| DEF-03 | System (ST-06, ST-07) | 40+ requests at exactly the same instant: a few connections are sometimes refused | High | Open |
-
-The group still needs to decide whether to fix DEF-02 and DEF-03 in a v1.2 or report them as open. See [3-acceptance-testing/README.md](3-acceptance-testing/README.md).
+| DEF-01 | Acceptance (UAT-14), System (ST-02 on v1.0) | Many students registering for the last seats at once over-enrolled the course | Critical | Fixed in v1.1, re-tested |
+| DEF-02 | Functional (FT-31) | Logout didn't end the session on the server; an old cookie still worked | Medium | Fixed in v1.2, re-tested |
+| DEF-03 | System (ST-06, ST-07) | 40+ requests at exactly the same instant: a few connections were sometimes refused | High | Fixed in v1.2, re-tested |
 
 `tools/unireg_client.py` is a small helper the Python test scripts share (starts the app, logs in, registers).

@@ -9,17 +9,18 @@ Checks that each UniReg feature does what it should: login, view courses, regist
 | [requirements.md](requirements.md) | 13 testable functional requirements (FR-01 to FR-13) | Requirements Identification (5) |
 | [test-cases.md](test-cases.md) | 32 test cases labelled by technique: EP, BVA, pairwise, error guessing, random | Test Case Design (10) |
 | [functional_test.py](functional_test.py) | Runs all 32 cases automatically | Test Execution (10) |
-| [results/functional_results.md](results/functional_results.md) | Execution log: expected vs actual, PASS/FAIL | Test Execution & Documentation (10) |
+| [results/](results/) | Execution logs for v1.2 (`functional_results.md`, `.csv`) and v1.1 (`_v1_1`): expected vs actual, PASS/FAIL | Test Execution & Documentation (10) |
 
 ## Results so far
 
-**31 / 32 passed** on build v1.1. One real defect was found:
+| Build | Result | Log |
+|---|---|---|
+| v1.1 (`app_v1_1.py`) | **31 / 32**: FT-31 failed, which found DEF-02 | [functional_results_v1_1.md](results/functional_results_v1_1.md) |
+| v1.2 (`app.py`, after the fix) | **32 / 32** | [functional_results.md](results/functional_results.md) |
 
-| ID | Found by | Problem | Suggested severity |
-|---|---|---|---|
-| DEF-02 | FT-31 (error guessing) | After logout, the old session cookie still works. Logout only clears the cookie in the browser and doesn't end the session on the server. Anyone who copied the cookie (for example on a shared lab PC) can still open the student's timetable. | Medium |
-
-Suggested fix for the report: on `/logout`, remove the session token from `SESSIONS` before redirecting. Then re-run the suite to show FT-31 passing.
+| ID | Found by | Problem | Severity | Status |
+|---|---|---|---|---|
+| DEF-02 | FT-31 (error guessing) | After logout, the old session cookie still worked. Logout only cleared the cookie in the browser and didn't end the session on the server, so anyone who copied the cookie (for example on a shared lab PC) could still open the student's timetable. | Medium | Fixed in v1.2: `/logout` now deletes the session on the server. FT-31 passes. |
 
 ## Steps
 
@@ -32,8 +33,8 @@ Suggested fix for the report: on `/logout`, remove the session token from `SESSI
    python3 1-functional-testing/functional_test.py
    ```
    It takes about a minute and writes `results/functional_results.md` and `.csv`. Open the CSV in Excel to build your results table.
-5. **Write up DEF-02.** Include the ID, steps to reproduce, expected vs actual result, severity, and the suggested fix.
-6. **Optional, but it earns marks:** run the original build too (`python3 1-functional-testing/functional_test.py app_v1_0.py`). It gives the same 31 / 32, because DEF-01 (over-enrolment) only appears when many students register at the same moment, which a one-at-a-time functional test can't trigger. That links your section to Ramzi's and Yasierul's.
+5. **Write up DEF-02.** Include the ID, steps to reproduce, expected vs actual result, severity, the fix, and the re-test result (FAIL on v1.1, PASS on v1.2). A before/after pair like this is strong evidence of a full test cycle.
+6. **Optional:** run the older builds too (`python3 1-functional-testing/functional_test.py app_v1_1.py` or `app_v1_0.py`). Results get a suffix such as `functional_results_v1_1.md`. v1.0 gives the same 31 / 32 as v1.1, because DEF-01 (over-enrolment) only appears when many students register at the same moment, which a one-at-a-time functional test can't trigger. That links your section to Ramzi's and Yasierul's.
 7. **Send Aliff** your section and the results table.
 
 ## Suggestions for full marks

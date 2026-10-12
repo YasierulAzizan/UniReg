@@ -1,4 +1,4 @@
-"""UniReg v1.1 - Student Course Registration System (prototype used as the system under test).
+"""UniReg v1.2 - Student Course Registration System (prototype used as the system under test).
 
 Run:  python3 app.py [port]   (default 8000), then open http://localhost:8000
 Demo login: student ID S001 .. S060, password Pass@123
@@ -131,12 +131,15 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
-    def student(self):
+    def token(self):
         for part in self.headers.get("Cookie", "").split(";"):
             k, _, v = part.strip().partition("=")
-            if k == "sid" and v in SESSIONS:
-                return SESSIONS[v]
+            if k == "sid":
+                return v
         return None
+
+    def student(self):
+        return SESSIONS.get(self.token())
 
     def send(self, body, title="UniReg", status=200, cookie=None):
         sid = self.student()
@@ -176,6 +179,8 @@ class Handler(BaseHTTPRequestHandler):
         if path in ("/", "/login"):
             return self.redirect("/courses") if sid else self.login_page()
         if path == "/logout":
+            # v1.2 fix for DEF-02: end the session on the server too, not only in the browser.
+            SESSIONS.pop(self.token(), None)
             return self.redirect("/login", "sid=; Max-Age=0")
         if not sid:
             return self.redirect("/login")
@@ -281,4 +286,7 @@ if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
     init_db()
     print(f"UniReg running on http://localhost:{port}")
+    # v1.2 fix for DEF-03: the default queue holds only 5 waiting connections, so a burst of
+    # simultaneous registrations had some refused. Allow 128 to wait instead.
+    ThreadingHTTPServer.request_queue_size = 128
     ThreadingHTTPServer(("0.0.0.0", port), Handler).serve_forever()
